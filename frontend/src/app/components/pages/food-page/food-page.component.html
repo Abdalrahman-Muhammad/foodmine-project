@@ -1,38 +1,8 @@
-<!-- <div class="'container">
-  <img [src]="food.imageUrl" alt="" />
-  <div class="details">
-    <div class="header">
-      <span class="name">{{ food.name }}</span
-      ><span class="favorite {{ food.favorite ? '' : 'not' }}">❤</span>
-    </div>
-    <div class="rating">
-      <ngx-stars
-        [initialStars]="food.stars"
-        [maxStars]="5"
-        [readonly]="true"
-      ></ngx-stars>
-    </div>
-    <div class="origins">
-      <span *ngFor="let origin of food.origins">
-        {{ origin }}
-      </span>
-    </div>
-    <div class="tags">
-      <a *ngFor="let tag of food.tags" routerLink="/tag/{{ tag }}">
-        {{ tag }}
-      </a>
-    </div>
-
-    <div class="cook-time">
-      Time to cook about<strong>{{ food.cookTime }}</strong> minutes
-    </div>
-    <div class="price">
-      <span>{{ food.price | currency }}</span>
-    </div>
-    <div><button>Add to Cart</button></div>
-  </div>
-</div> -->
-<div class="container">
+<app-not-found
+  [visible]="!food.id"
+  resetLinkText="Back To Homepage"
+></app-not-found>
+<div class="container" *ngIf="food.id">
   <img [src]="food.imageUrl" [alt]="food.name" />
 
   <div class="details">

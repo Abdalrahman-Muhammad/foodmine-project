@@ -11,9 +11,10 @@ import { FooterComponent } from './components/partials/footer/footer.component';
 import { FoodPageComponent } from './components/pages/food-page/food-page.component';
 import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
 import { TitlesComponent } from './components/partials/titles/titles.component';
+import { NotFoundComponent } from './components/partials/not-found/not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, HomeComponent, SearchComponent, TagsComponent, FooterComponent, FoodPageComponent, CartPageComponent, TitlesComponent],
+  declarations: [AppComponent, HeaderComponent, HomeComponent, SearchComponent, TagsComponent, FooterComponent, FoodPageComponent, CartPageComponent, TitlesComponent, NotFoundComponent],
   imports: [BrowserModule, AppRoutingModule, NgxStarsModule],
   providers: [],
   bootstrap: [AppComponent],
