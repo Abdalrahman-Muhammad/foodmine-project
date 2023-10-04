@@ -20,19 +20,6 @@ router.get(
   })
 );
 
-router.route("/login").post((req, res) => {
-  const { email, password } = req.body;
-  const user = sample_users.find(
-    (user) => user["email"] === email && user["password"] === password
-  );
-
-  if (user) {
-    res.send(generateTokenResponse(user));
-  } else {
-    res.status(400).send("email or password is not valid");
-  }
-});
-
 const generateTokenResponse = (user: any) => {
   const token = jwt.sign(
     {
@@ -44,8 +31,26 @@ const generateTokenResponse = (user: any) => {
       expiresIn: "30d",
     }
   );
-  user.token = token;
+  user = { ...user["_doc"], token };
+  console.log(
+    "🚀 ~ file: user.router.ts:35 ~ generateTokenResponse ~ user:",
+    user
+  );
   return user;
 };
+
+router.route("/login").post(
+  asyncHandler(async (req, res) => {
+    const { email, password } = req.body;
+    const user = await UserModel.findOne({ email, password });
+
+    if (user) {
+      console.log("User data:", user);
+      res.send(generateTokenResponse(user));
+    } else {
+      res.status(400).send("email or password is not valid");
+    }
+  })
+);
 
 export default router;
