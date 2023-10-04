@@ -61,6 +61,7 @@ router.route("/tags").get(
       count: await FoodModel.countDocuments(),
     };
 
+    //? add all tag to the beginning of the tags
     tags.unshift(all);
     res.send(tags);
   })
