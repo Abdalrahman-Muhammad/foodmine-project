@@ -41,9 +41,10 @@ const generateTokenResponse = (user: any) => {
 router.route("/login").post(
   asyncHandler(async (req, res) => {
     const { email, password } = req.body;
-    const user = await UserModel.findOne({ email, password });
+    const user = await UserModel.findOne({ email });
+    const isPasswordCorrect = await bcrypt.compare(password, user!["password"]);
 
-    if (user) {
+    if (isPasswordCorrect) {
       res.send(generateTokenResponse(user));
     } else {
       res.status(HTTP_BAD_REQUEST).send("email or password is not valid");
@@ -53,6 +54,7 @@ router.route("/login").post(
 
 router.route("/register").post(
   asyncHandler(async (req, res) => {
+    console.log(req.body);
     const { name, email, password, address } = req.body;
     const user = await UserModel.findOne({ email });
     if (user) {
