@@ -39,4 +39,15 @@ export class FoodService {
   getFoodById(foodId: string): Observable<Food> {
     return this.http.get<Food>(`${FOODS_BY_ID_URL}${foodId}`);
   }
+
+  createFood(food: any) {
+    return this.http.post<Food>(FOODS_URL, food);
+  }
+
+  updateFood(id: any, food: any) {
+    return this.http.put<Food>(`${FOODS_URL}/${id}`, food);
+  }
+  deleteFood(id: any) {
+    return this.http.delete(`${FOODS_URL}/${id}`);
+  }
 }
