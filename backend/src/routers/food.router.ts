@@ -19,12 +19,21 @@ router.get(
   })
 );
 
-router.route("/").get(
-  asyncHandler(async (req, res) => {
-    const foods = await FoodModel.find();
-    res.send(foods);
-  })
-);
+router
+  .route("/")
+  .get(
+    asyncHandler(async (req, res) => {
+      const foods = await FoodModel.find();
+      res.send(foods);
+    })
+  )
+  .post(
+    asyncHandler(async (req, res) => {
+      const newFood = await FoodModel.create(req.body);
+
+      res.send(newFood);
+    })
+  );
 
 router.route("/search/:searchTerm").get(
   asyncHandler(async (req, res) => {
@@ -74,11 +83,30 @@ router.route("/tag/:tagName").get(
   })
 );
 
-router.route("/:foodId").get(
-  asyncHandler(async (req, res) => {
-    const food = await FoodModel.findById(req.params.foodId);
-    res.send(food);
-  })
-);
+router
+  .route("/:foodId")
+  .get(
+    asyncHandler(async (req, res) => {
+      const food = await FoodModel.findById(req.params.foodId);
+      res.send(food);
+    })
+  )
+  .delete(
+    asyncHandler(async (req, res) => {
+      await FoodModel.findByIdAndDelete(req.params["foodId"]);
+      res.send();
+    })
+  )
+  .put(
+    asyncHandler(async (req, res) => {
+      const food = await FoodModel.findByIdAndUpdate(
+        req.params["foodId"],
+        req.body,
+        { new: true }
+      );
+      console.log(req.body);
+      res.send(food);
+    })
+  );
 
 export default router;

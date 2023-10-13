@@ -5,6 +5,7 @@ import { sample_users } from "../data";
 import { User, UserModel } from "../models/user.model";
 import { HTTP_BAD_REQUEST, HTTP_CONFLICT } from "../constants/http_status";
 import bcrypt from "bcryptjs";
+import { Types } from "mongoose";
 
 const router = express.Router();
 
@@ -24,11 +25,8 @@ router.get(
 
 const generateTokenResponse = (user: any) => {
   const token = jwt.sign(
-    {
-      email: user["email"],
-      isAdmin: user["isAdmin"],
-    },
-    "SomeRandomText",
+    { id: user["id"], email: user["email"], isAdmin: user["isAdmin"] },
+    process.env.JWT_SECRET!,
     {
       expiresIn: "30d",
     }
@@ -74,6 +72,10 @@ router.route("/register").post(
     };
 
     const dbUser = await UserModel.create(newUser);
+    console.log(
+      "🚀 ~ file: user.router.ts:76 ~ asyncHandler ~ dbUser:",
+      dbUser
+    );
     res.send(generateTokenResponse(dbUser));
   })
 );

@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
 export interface User {
   id: string;
@@ -11,7 +11,7 @@ export interface User {
 
 export const UserSchema = new Schema<User>(
   {
-    id: String,
+    id: { type: String },
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
@@ -28,5 +28,10 @@ export const UserSchema = new Schema<User>(
     },
   }
 );
+
+UserSchema.pre("save", function (next) {
+  this.id = this._id;
+  next();
+});
 
 export const UserModel = model<User>("user", UserSchema);

@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
 export interface Food {
   id: string;
@@ -14,6 +14,7 @@ export interface Food {
 
 export const FoodSchema = new Schema<Food>(
   {
+    id: { type: String },
     name: { type: String, required: true },
     price: { type: Number, required: true },
     tags: { type: [String] },
@@ -33,5 +34,10 @@ export const FoodSchema = new Schema<Food>(
     },
   }
 );
+
+FoodSchema.pre("save", function (next) {
+  this.id = this._id;
+  next();
+});
 
 export const FoodModel = model<Food>("food", FoodSchema);
