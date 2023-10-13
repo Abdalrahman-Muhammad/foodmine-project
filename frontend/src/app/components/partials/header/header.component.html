@@ -4,19 +4,31 @@
     <nav>
       <ul>
         <li *ngIf="!isAuth"><a routerLink="/login">Login</a></li>
-        <li class="menu-container" *ngIf="isAuth">
-          <a routerLink="/dashboard">{{ user.name }}</a>
-          <div class="menu">
-            <a routerLink="/profile">Profile</a>
-            <a routerLink="/orders">Orders</a>
-            <a (click)="logout()">Logout</a>
-          </div>
-        </li>
-        <li>
-          <a routerLink="/cart-page">
-            Cart <span *ngIf="cartQuantity">{{ cartQuantity }}</span>
-          </a>
-        </li>
+        <ng-container *ngIf="isAuth">
+          <li class="menu-container" *ngIf="!user.isAdmin">
+            <a routerLink="/dashboard">{{ user.name }}</a>
+            <div class="menu">
+              <a routerLink="/profile">Profile</a>
+              <a routerLink="/orders">Orders</a>
+              <a (click)="logout()">Logout</a>
+            </div>
+          </li>
+          <li class="menu-container" *ngIf="user.isAdmin">
+            <a routerLink="/admin-dashboard">{{ user.name }} (Admin)</a>
+            <div class="menu">
+              <a routerLink="/admin-settings">Admin Settings</a>
+              <a routerLink="/admin-reports">Admin Reports</a>
+              <a routerLink="/food/0/edit">Add Food</a>
+              <!-- Add Food link for admins -->
+              <a (click)="logout()">Logout</a>
+            </div>
+          </li>
+          <li *ngIf="!user.isAdmin">
+            <a routerLink="/cart-page">
+              Cart <span *ngIf="cartQuantity">{{ cartQuantity }}</span>
+            </a>
+          </li>
+        </ng-container>
       </ul>
     </nav>
   </div>
