@@ -2,6 +2,7 @@
   [visible]="!food"
   resetLinkText="Back To Homepage"
 ></app-not-found>
+
 <div class="container" *ngIf="food">
   <img [src]="food.imageUrl" [alt]="food.name" />
 
@@ -27,9 +28,7 @@
     </div>
 
     <div class="tags">
-      <a *ngFor="let tag of food.tags" routerLink="/tag/{{ tag }}">
-        {{ tag }}
-      </a>
+      <a *ngFor="let tag of food.tags" routerLink="/tag/{{ tag }}">{{ tag }}</a>
     </div>
 
     <div class="cook-time">
@@ -44,6 +43,18 @@
       </span>
     </div>
 
-    <button (click)="addToCart()">Add To Cart</button>
+    <!-- Button for regular users (non-admins) -->
+    <button *ngIf="!user.isAdmin" (click)="addToCart()">Add To Cart</button>
+
+    <!-- Buttons for admin users -->
+    <div *ngIf="user.isAdmin">
+      <button
+        style="width: 100px; margin: 10px; background: #ffcc00"
+        (click)="editFood()"
+      >
+        Edit
+      </button>
+      <button style="width: 100px" (click)="deleteFood()">Delete</button>
+    </div>
   </div>
 </div>
