@@ -1,0 +1,70 @@
+<div class="food-form-container">
+  <h2>{{ id === "0" ? "Add Food Item" : "Edit Food Item" }}</h2>
+
+  <form [formGroup]="foodForm" (ngSubmit)="saveFood()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" formControlName="name" />
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="text" id="price" formControlName="price" />
+    </div>
+
+    <div class="form-group">
+      <label for="tags">Tags</label>
+      <div formArrayName="tags">
+        <div
+          *ngFor="let tagControl of getTagsFormArray().controls; let i = index"
+          class="tag-group"
+        >
+          <input type="text" [formControlName]="i" placeholder="Tag" />
+          <button type="button" (click)="removeTag(i)">Remove</button>
+        </div>
+      </div>
+      <button type="button" (click)="addTag()">Add Tag</button>
+    </div>
+
+    <div class="form-group">
+      <label for="favorite">Favorite</label>
+      <input type="checkbox" id="favorite" formControlName="favorite" />
+    </div>
+
+    <div class="form-group">
+      <label for="stars">Stars</label>
+      <input type="number" id="stars" formControlName="stars" />
+    </div>
+
+    <div class="form-group">
+      <label for="imageUrl">Image URL</label>
+      <input type="text" id="imageUrl" formControlName="imageUrl" />
+    </div>
+
+    <div class="form-group">
+      <label for="origins">Origins</label>
+      <div formArrayName="origins">
+        <div
+          *ngFor="
+            let originControl of getOriginsFormArray().controls;
+            let i = index
+          "
+          class="origin-group"
+        >
+          <input type="text" [formControlName]="i" placeholder="Origin" />
+          <button type="button" (click)="removeOrigin(i)">Remove</button>
+        </div>
+      </div>
+      <button type="button" (click)="addOrigin()">Add Origin</button>
+    </div>
+
+    <div class="form-group">
+      <label for="cookTime">Cook Time</label>
+      <input type="text" id="cookTime" formControlName="cookTime" />
+    </div>
+
+    <button type="submit" class="submit-button">
+      {{ id === "0" ? "Add Food" : "Update Food" }}
+    </button>
+  </form>
+</div>
