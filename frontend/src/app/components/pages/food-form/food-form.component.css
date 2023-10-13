@@ -1,0 +1,89 @@
+.food-form-container {
+  background: linear-gradient(to bottom, #f8f8f8, #dcdcdc);
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  text-align: center;
+}
+
+.food-form-container h2 {
+  font-size: 1.8em;
+  color: #ff5733;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 20px;
+}
+
+.form-group {
+  margin: 15px 0;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #333;
+  margin: 10px 0;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="checkbox"] {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ff5733;
+  border-radius: 5px;
+  font-size: 1em;
+  color: #333;
+  margin: 5px 0;
+}
+
+.tag-group,
+.origin-group {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.tag-group input,
+.origin-group input {
+  flex: 1;
+  padding: 8px;
+  border: 2px solid #ff5733;
+  border-radius: 5px;
+  font-size: 0.9em;
+  color: #333;
+  margin-right: 10px;
+}
+
+button {
+  background-color: #ff5733;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 1em;
+  margin: 15px 0;
+}
+
+button:hover {
+  background-color: #ff9966;
+}
+
+.submit-button {
+  background: linear-gradient(45deg, #ff5733, #ff9966);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin: 20px 0;
+}
+
+.submit-button:hover {
+  background: linear-gradient(45deg, #ff9966, #ff5733);
+}
